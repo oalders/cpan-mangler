@@ -1,0 +1,15 @@
+=head1 NAME
+
+CPAN Mangler
+
+=head1 DESCRIPTION
+
+Subvert CPAN to your will
+
+=head1 SYNOPSIS
+
+    plackup app.psgi
+    # Twiggy: Accepting connections at http://0.0.0.0:5000/
+
+Point your favourite graphical web browser at this URL and your CPAN code
+snippets will now enjoy syntax highlighting.
