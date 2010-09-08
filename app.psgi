@@ -58,7 +58,7 @@ my $app = builder {
         #};
         enable 'HTMLify',
             set_start => qq[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n<html lang="en">\n<head>$source_highlight</head>\n<body>\n<pre class="brush: pl">],
-            set_end   => "</pre>\n</body>\n</html>";
+            set_end   => qq[</pre>\n</body>\n</html>];
         Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/src/' )->to_app;
     };
     mount "/"    => builder {

@@ -20,11 +20,16 @@ sub call {
                 my $chunk = shift;
                 if (!defined $chunk) {
                     return unless $self->set_end;
+                    __PACKAGE__->{'count'} = 0;
                     return $self->set_end;
                 }
-                return $self->set_start . $chunk if $self->set_start && __PACKAGE__->{'count'} == 0;
-                return $chunk;
+                else {
+                    if ($self->set_start && __PACKAGE__->{'count'} == 0) {
+                        $chunk = $self->set_start . $chunk;
+                    }
+                }
                 __PACKAGE__->{'count'}++;
+                return $chunk;
             }
         }
         
