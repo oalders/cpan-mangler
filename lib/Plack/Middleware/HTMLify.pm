@@ -7,6 +7,8 @@ use Plack::Util;
 use Plack::Util::Accessor
     qw( set_doctype set_head set_body_start set_body_end );
 
+our $VERSION = '0.01';
+
 __PACKAGE__->{'count'} = 0;
 
 sub call {
@@ -22,6 +24,7 @@ sub call {
 
             return sub {
                 my $chunk = shift;
+                my $junk = shift;
                 if ( !defined $chunk ) {
                     __PACKAGE__->{'count'} = 0;
                     $chunk = qq[\n</body>\n</html>];
