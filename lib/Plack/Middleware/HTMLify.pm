@@ -68,7 +68,7 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::HTMLify - Modifies the entire body.
+Plack::Middleware::HTMLify - Transforms a non-html document into html.
 
 =head1 SYNOPSIS
 
@@ -89,7 +89,7 @@ Plack::Middleware::HTMLify - Modifies the entire body.
 
 =head1 DESCRIPTION
 
-No description.
+Used for transforming a non-html document into html.
 
 =head1 AUTHOR
 
