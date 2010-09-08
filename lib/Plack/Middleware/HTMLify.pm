@@ -19,8 +19,8 @@ sub call {
             return sub {
                 my $chunk = shift;
                 if (!defined $chunk) {
-                    return unless $self->set_end;
                     __PACKAGE__->{'count'} = 0;
+                    return unless $self->set_end;
                     return $self->set_end;
                 }
                 else {
