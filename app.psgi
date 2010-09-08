@@ -51,14 +51,9 @@ $(document).ready(function() {
 my $app = builder {
     #enable "Debug", panels => [qw(Environment Memory Timer Response)];
     mount "/source" => builder {
-        enable 'Header', set => [ 'Content-Type' => 'text/html' ];
-        #enable 'SimpleContentFilter', filter => sub {
-        #    s{package(.*)}{<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n<html lang="en">\n<head>$source_highlight</head>\n<body>\n<pre class="brush: pl">\n$1}gi;
-        #    s{(.*);1}{\n$1</pre>\n</body>\n</html>}gi;
-        #};
         enable 'HTMLify',
             set_doctype    => qq[<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">],
-            set_head       => qq[<head>$source_highlight</head>],
+            set_head       => $source_highlight,
             set_body_start => qq[<pre class="brush: pl">],
             set_body_end   => qq[</pre>];
             ;
