@@ -27,9 +27,9 @@ sub call {
                     if ($self->set_start && __PACKAGE__->{'count'} == 0) {
                         $chunk = $self->set_start . $chunk;
                     }
+                    __PACKAGE__->{'count'}++;
+                    return $chunk;
                 }
-                __PACKAGE__->{'count'}++;
-                return $chunk;
             }
         }
         
