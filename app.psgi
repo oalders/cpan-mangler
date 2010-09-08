@@ -49,15 +49,16 @@ $(document).ready(function() {
 
 my $app = builder {
     enable "Debug", panels => [qw(Environment Memory Timer Response)];
-    mount "/src" => builder {
+    mount "/source" => builder {
         enable 'SimpleContentFilter', filter => sub {
             s{package}{<head>$source_highlight</head>\npackage}gi;
         };
-        Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/' )->to_app;
+        Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/src/' )->to_app;
     };
-    mount "/"       => builder {
+    mount "/"    => builder {
         enable 'SimpleContentFilter', filter => sub {
             s{</head>}{$pod_highlight</head>}gi;
+            s{/src/}{/source/}gi;
         };
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
     };
