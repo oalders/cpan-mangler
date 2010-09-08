@@ -39,7 +39,7 @@ my $source_highlight = q[
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(document).wrap('<pre />');
+    $(body).wrapInner('<pre />');
     $("pre").wrap('<div style="padding: 1px 5px; background-color: #000;" />').addClass("brush: pl");
     SyntaxHighlighter.all();
 });
@@ -50,14 +50,15 @@ $(document).ready(function() {
 my $app = builder {
     enable "Debug", panels => [qw(Environment Memory Timer Response)];
     mount "/source" => builder {
+        enable 'Header', set => [ 'Content-Type' => 'text/html' ];
         enable 'SimpleContentFilter', filter => sub {
-            s{package}{<head>$source_highlight</head>\npackage}gi;
+            s{(.*)}{<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n<html lang="en">\n<head>$source_highlight</head>\n<body>\n$1</body>\n</html>}gxms;
         };
         Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/src/' )->to_app;
     };
     mount "/"    => builder {
         enable 'SimpleContentFilter', filter => sub {
-            s{</head>}{$pod_highlight</head>}gi;
+            s{</head>}{$pod_highlight</head>}i;
             s{/src/}{/source/}gi;
         };
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
