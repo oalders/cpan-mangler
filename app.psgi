@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use Data::Dumper;
+use HTML::Entities;
 use Plack::App::Proxy;
 use Plack::Builder;
 
@@ -55,6 +55,9 @@ my $app = builder {
             set_body_start => qq[<pre class="brush: pl">],
             set_body_end   => qq[</pre>];
             ;
+        enable 'SimpleContentFilter', filter => sub {
+            encode_entities($_);
+        };
         Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/src/' )->to_app;
     };
     mount "/"    => builder {
