@@ -8,8 +8,21 @@ Subvert CPAN to your will
 
 =head1 SYNOPSIS
 
-    plackup app.psgi
+    plackup -I../Plack-Middleware-HTMLify/lib
     # Twiggy: Accepting connections at http://0.0.0.0:5000/
 
 Point your favourite graphical web browser at this URL and your CPAN code
 snippets will now enjoy syntax highlighting.
+
+=head1 INSTALLATION
+
+For syntax highlighting for source code, you'll need to clone the
+Plack::Middleware::HTMLify repo
+
+    git clone http://github.com/ioncache/Plack-Middleware-HTMLify.git
+    git clone http://github.com/oalders/cpan-mangler.git
+
+    cpanm Plack Plack::App::Proxy
+
+    cd cpan-mangler
+    plackup -I../Plack-Middleware-HTMLify/lib
