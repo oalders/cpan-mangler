@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
 
 # start this script via:
-# plackup -Ilib examples/app.psgi
+# plackup -Ilib examples/pod-mangler.psgi
 
-# this module only mangles the POD pages
+# this script mangles the POD pages and adds a debug panel
 
 use strict;
 use warnings;
