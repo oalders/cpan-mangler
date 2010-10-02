@@ -22,7 +22,7 @@ Plack::Middleware::HTMLify repo
     git clone http://github.com/ioncache/Plack-Middleware-HTMLify.git
     git clone http://github.com/oalders/cpan-mangler.git
 
-    cpanm Plack Plack::App::Proxy
+    cpanm Plack Plack::App::Proxy Plack::Handler::Twiggy
 
     cd cpan-mangler
     plackup -I../Plack-Middleware-HTMLify/lib
