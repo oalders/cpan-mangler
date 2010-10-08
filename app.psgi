@@ -9,6 +9,7 @@ use strict;
 use warnings;
 
 use HTML::Entities;
+use HTML::Highlighter;
 use Plack::App::Proxy;
 use Plack::Builder;
 
@@ -20,6 +21,7 @@ my $pod_highlight = q[
 <link href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
 <link href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">.highlight {background:yellow}</style>
 <script type="text/javascript">
 $(document).ready(function() {
     $("pre").wrap('<div style="padding: 1px 10px; background-color: #fff; border: 1px solid #999;" />').addClass("brush: pl");
@@ -65,6 +67,7 @@ my $app = builder {
             s{</head>}{$pod_highlight</head>}i;
             s{/src/}{/source/}gi;
         };
+        enable "+HTML::Highlighter", param => "query";
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
     };
 };
