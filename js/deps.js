@@ -60,7 +60,7 @@ function show_top_dists() {
         txt += '<br />';
         for ( module in infoblocks_by_module ) {
             if ( infoblocks_by_module[module] && dists_by_module[module] == dist ) {
-                txt += '&nbsp;&nbsp;&nbsp;&nbsp;' + module;
+                txt += '&nbsp;&nbsp;&nbsp;&nbsp;' + module + '<br />';
             }
         }
         txt += "</p>";
