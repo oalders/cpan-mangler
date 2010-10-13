@@ -52,15 +52,15 @@ function add_dependents_to_page(dist) {
 // adds the top distrubtions section to the html
 function show_top_dists() {
     $('div.t4').css('position', 'relative');
-    $('<div />').attr('id', 'top_dists').css({ 'width' : '400px', 'border' : '1px solid #006699', 'position' : 'absolute', 'top' : '20px', 'right' : '0px', 'padding' : '8px', 'font-size' : '10px', 'font-weight' : 'normal', 'color': '#000' }).appendTo('div.t4');
+    $('<div />').attr('id', 'top_dists').css({ 'width' : '400px', 'border' : '1px solid #006699', 'position' : 'absolute', 'top' : '40px', 'right' : '0px', 'padding' : '8px', 'font-size' : '12px', 'font-weight' : 'normal', 'color': '#000' }).appendTo('div.t4');
     var txt = '<p style="text-align: center; font-size: 12px; font-weight: bold;">Distributions in order of number of CPAN dependents:<p>';
     dependent_counts = assocSort(dependent_counts);
     for ( var dist in dependent_counts ) {
-        txt += "<p>" + dist + " (" + dependent_counts[dist] + " dependents)";
-        txt += "<br />";
+        txt += '<p>' + dist + ' (' + dependent_counts[dist] + ' dependents)';
+        txt += '<br />';
         for ( module in infoblocks_by_module ) {
             if ( infoblocks_by_module[module] && dists_by_module[module] == dist ) {
-                txt += "    " + module + "\n";
+                txt += '&nbsp;&nbsp;&nbsp;&nbsp;' + module;
             }
         }
         txt += "</p>";
