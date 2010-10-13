@@ -13,7 +13,7 @@ use HTML::Highlighter;
 use Plack::App::Proxy;
 use Plack::Builder;
 
-my $script_Temp = '<script type="text/javascript" src="http://github.com/oalders/cpan-mangler/raw/master/js/deps.js"></script>';
+my $script_Temp = '<script type="text/javascript" src="http://192.168.92.99/cpan-mangler/js/deps.js"></script>';
 
 my $pod_highlight = q[
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -21,7 +21,7 @@ my $pod_highlight = q[
 <script type="text/javascript" src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushPerl.js"></script>
 <script type="text/javascript" src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushJScript.js"></script>
 <script type="text/javascript" src="http://github.com/jamespadolsey/jQuery-Plugins/raw/master/cross-domain-ajax/jquery.xdomainajax.js"></script>
-<script type="text/javascript" src="http://192.168.92.99/cpan-mangler/js/deps.js"></script>
+<script type="text/javascript" src="http://github.com/oalders/cpan-mangler/raw/master/js/deps.js"></script>
 <link type="text/css" href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shCore.css" rel="stylesheet" />
 <link type="text/css" href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shThemeDefault.css" rel="stylesheet" />
 
