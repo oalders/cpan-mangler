@@ -74,9 +74,7 @@ my $pod_highlight = q[
         }
 
         var location = document.location.href;
-console.log(location);        
         location = location.replace(/http:\/\/.*?\//, "http://search.cpan.org/");
-console.log(location);
         $("div.logo").css({'position' : 'relative', 'z-index' : '500'});
         $("div.menubar").css({'position' : 'relative'});
         $("div.menubar").append('<div style="float: right;position: absolute; top: 20px; right: 0px;"><iframe src="http://www.facebook.com/plugins/like.php?href=' + encodeURIComponent(location) + '&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></div>');
