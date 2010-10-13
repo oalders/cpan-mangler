@@ -20,7 +20,6 @@ my $pod_highlight = q[
 <script type="text/javascript" src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shCore.js"></script>
 <script type="text/javascript" src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushPerl.js"></script>
 <script type="text/javascript" src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushJScript.js"></script>
-<script type="text/javascript" src="http://github.com/jamespadolsey/jQuery-Plugins/raw/master/cross-domain-ajax/jquery.xdomainajax.js"></script>
 <script type="text/javascript" src="http://github.com/oalders/cpan-mangler/raw/master/js/deps.js"></script>
 <link type="text/css" href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shCore.css" rel="stylesheet" />
 <link type="text/css" href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shThemeDefault.css" rel="stylesheet" />
@@ -73,7 +72,11 @@ my $pod_highlight = q[
         for ( var dist in dists ) {
             gather_cpan_dependents(dist);
         }
-    
+
+        var location = document.location.href;
+        location = location.replace(/http:\/\/.*\//, "http://search.cpan.org/");
+        $("div.path").next().append('<div style="float: left;"><iframe src="http://www.facebook.com/plugins/like.php?href=' + escape(location) + '&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></div>');
+
     });
 </script>
 
