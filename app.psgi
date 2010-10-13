@@ -42,7 +42,7 @@ my $pod_highlight = q[
         $("h2.sr").each(function() {
         
             // parse the page to get the list of modules
-            module = $(this).find("b").html();
+            module = $(this).find("b").text();
   
             // keep a reference to the line that shows information about the module
             infoblock = $(this).next().next().next().get(0);
@@ -113,7 +113,7 @@ my $app = builder {
             s{</head>}{$pod_highlight</head>}i;
             s{/src/}{/source/}gi;
         };
-        #enable '+HTML::Highlighter', param => 'query';
+        enable '+HTML::Highlighter', param => 'query';
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
     };
 };
