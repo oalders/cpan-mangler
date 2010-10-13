@@ -26,10 +26,12 @@ function find_sibling_by_tagname(start, tagname, failsafe, iteration) {
 // and calls the callback to have the page updated for all modules that are part of the distribution
 function gather_cpan_dependents(dist) {
     $.ajax({ 
-        type: "GET",
+        type: 'GET',
         url: 'http://deps.cpantesters.org/depended-on-by.pl?dist=' + escape(dist),
-        success: function( resp ) {
-console.log(resp);
+        success: function( resp, status, xhr ) {
+console.log("Response: " + resp);
+console.log("Status: " + status);
+console.log("XHR: " + xhr);
             num = '0';
             if ( resp.responseText ) {
                 num = resp.responseText.split('<li>').length-1;
@@ -39,6 +41,14 @@ console.log(resp);
             num_dists_fetched += 1;
             if ( num_dists_fetched == num_dists ) {
                 show_top_dists();
+            }
+        },
+        error: function(xhr, status, error) {
+            if (window.console && window.console.log) {
+                console.log("Error:");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
             }
         }
     });
