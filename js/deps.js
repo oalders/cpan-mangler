@@ -29,6 +29,7 @@ function gather_cpan_dependents(dist) {
         type: "GET",
         url: 'http://deps.cpantesters.org/depended-on-by.pl?dist=' + escape(dist),
         success: function( resp ) {
+console.log(resp);
             num = '0';
             if ( resp.responseText ) {
                 num = resp.responseText.split('<li>').length-1;

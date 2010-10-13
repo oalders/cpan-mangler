@@ -41,7 +41,7 @@ my $pod_highlight = q[
         
             // parse the page to get the list of modules
             module = $(this).find("b").html();
-console.log("module: " + module);    
+  
             // keep a reference to the line that shows information about the module
             infoblock = $(this).next().next().next().get(0);
             if ( ! infoblock ) {
