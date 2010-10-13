@@ -25,16 +25,25 @@ function find_sibling_by_tagname(start, tagname, failsafe, iteration) {
 // and counts the number of dependents
 // and calls the callback to have the page updated for all modules that are part of the distribution
 function gather_cpan_dependents(dist) {
+
+//    $('body').load('http://deps.cpantesters.org/depended-on-by.pl', { dist: escape(dist) }, function(resp, status, xhr) {
+//console.log("Response: " + resp);
+//console.log("Status: " + status);
+//console.log("XHR: " + xhr);
+//    });
+    
     $.ajax({ 
         type: 'GET',
-        url: 'http://deps.cpantesters.org/depended-on-by.pl?dist=' + escape(dist),
+        url: 'http://deps.cpantesters.org/depended-on-by.pl',
+        data: { dist: escape(dist) },
+        //dataType: 'jsonp',
         success: function( resp, status, xhr ) {
 console.log("Response: " + resp);
 console.log("Status: " + status);
 console.log("XHR: " + xhr);
             num = '0';
-            if ( resp.responseText ) {
-                num = resp.responseText.split('<li>').length-1;
+            if ( resp ) {
+                num = resp.split('<li>').length-1;
             }
             dependent_counts[dist] = num;
             add_dependents_to_page(dist);
