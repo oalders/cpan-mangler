@@ -1,10 +1,3 @@
-var infoblocks_by_module = [];
-var dists_by_module = [];
-var dists = [];
-var dependent_counts = [];
-var num_dists_fetched = 0;
-var num_dists = 0;
-
 // the DOM for search.cpan.org isn't easy to parse
 // this function recursively finds DOM siblings by tagname
 function find_sibling_by_tagname(start, tagname, failsafe, iteration) {
@@ -32,10 +25,10 @@ function find_sibling_by_tagname(start, tagname, failsafe, iteration) {
 // and counts the number of dependents
 // and calls the callback to have the page updated for all modules that are part of the distribution
 function gather_cpan_dependents(dist) {
-    GM_xmlhttpRequest({ 
-        method: "GET",
+    $.ajax({ 
+        type: "GET",
         url: 'http://deps.cpantesters.org/depended-on-by.pl?dist=' + escape(dist),
-        onload: function( resp ) {
+        success: function( resp ) {
             num = '0';
             if ( resp.responseText ) {
                 num = resp.responseText.split('<li>').length-1;

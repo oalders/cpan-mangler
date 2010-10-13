@@ -24,48 +24,55 @@ my $pod_highlight = q[
 
 <style type="text/css">.highlight {background:yellow}</style>
 <script type="text/javascript">
-$(document).ready(function() {
-    $("pre").wrap('<div style="padding: 1px 10px; background-color: #fff; border: 1px solid #999;" />').addClass("brush: pl");
-    SyntaxHighlighter.defaults['gutter'] = false;
-    SyntaxHighlighter.defaults['toolbar'] = false;
-    SyntaxHighlighter.all();
-    
-    for each ( sr in document.getElementsByTagName( 'h2' ) ) {
-    
-        // parse the page to get the list of modules
-        module = sr.childNodes[0].childNodes[0].innerHTML;
-    
-        // keep a reference to the line that shows information about the module
-        infoblock = find_sibling_by_tagname(sr, "SMALL", "P", 1);
-        if ( ! infoblock ) {
-            // edge case - there is no description for this module
-            infoblock = find_sibling_by_tagname(sr, "SMALL", "P", 0);
-        }
-    
-        // keep track of the module distribution 
-        if ( infoblock && infoblock.childNodes[1] ) {
-            dist = infoblock.childNodes[1].href;
-        }
-        if ( dist ) {
-            dist = dist.replace(/\/$/, '');
-            dist = dist.replace(/^.*\//, '');
-    
-            dists_by_module[module] = dist;
-            infoblocks_by_module[module] = infoblock;
-            dists[dist] = 1;
-        }
-    }
-    
-    // loop through the dists to get the number cpan dependents
-    // a callback will update the page with the number of dependents for each module
-    for ( var dist in dists ) {
-        num_dists++;
-    }
-    for ( var dist in dists ) {
-        gather_cpan_dependents(dist);
-    }
+    var infoblocks_by_module = [];
+    var dists_by_module = [];
+    var dists = [];
+    var dependent_counts = [];
+    var num_dists_fetched = 0;
+    var num_dists = 0;
 
-});
+    $(document).ready(function() {
+        $("pre").wrap('<div style="padding: 1px 10px; background-color: #fff; border: 1px solid #999;" />').addClass("brush: pl");
+        SyntaxHighlighter.defaults['gutter'] = false;
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    
+        $("h2.sr").each(function() {
+        
+            // parse the page to get the list of modules
+            module = $(this).find("b").html();
+console.log("module: " + module);    
+            // keep a reference to the line that shows information about the module
+            infoblock = $(this).next().next().next().get(0);
+            if ( ! infoblock ) {
+                // edge case - there is no description for this module
+                infoblock = find_sibling_by_tagname(this, "SMALL", "P", 0);
+            }
+        
+            // keep track of the module distribution 
+            if ( infoblock && infoblock.childNodes[1] ) {
+                dist = infoblock.childNodes[1].href;
+            }
+            if ( dist ) {
+                dist = dist.replace(/\/$/, '');
+                dist = dist.replace(/^.*\//, '');
+        
+                dists_by_module[module] = dist;
+                infoblocks_by_module[module] = infoblock;
+                dists[dist] = 1;
+            }
+        });
+        
+        // loop through the dists to get the number cpan dependents
+        // a callback will update the page with the number of dependents for each module
+        for ( var dist in dists ) {
+            num_dists++;
+        }
+        for ( var dist in dists ) {
+            gather_cpan_dependents(dist);
+        }
+    
+    });
 </script>
 
 ];
@@ -104,7 +111,7 @@ my $app = builder {
             s{</head>}{$pod_highlight</head>}i;
             s{/src/}{/source/}gi;
         };
-        enable '+HTML::Highlighter', param => 'query';
+        #enable '+HTML::Highlighter', param => 'query';
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
     };
 };
