@@ -111,8 +111,9 @@ function requestCrossDomain( site, callback ) {
             }
         }
         // Else, Maybe we requested a site that doesn't exist, and nothing returned.
-        //else if (window.console && window.console.log) {
-        //    console.log('Error: Nothing returned from getJSON.');
-        //}
+        else if (window.console && window.console.log) {
+            console.log('Error: Nothing returned from getJSON.');
+            callback('');
+        }
     }
 }

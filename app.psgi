@@ -70,7 +70,6 @@ my $pod_highlight = q[
         for ( var dist in dists ) {
             num_dists++;
         }
-console.log(num_dists);
         for ( var dist in dists ) {
             gather_cpan_dependents(dist);
         }
