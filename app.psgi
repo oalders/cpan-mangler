@@ -79,12 +79,12 @@ my $pod_highlight = q[
         if (typeof permalink != 'undefined') {
             location = "http://search.cpan.org" + permalink;
         }
-        //console.log( location );
-        //console.log(encodeURIComponent(location));
-        $("div.logo").css({'position' : 'relative', 'z-index' : '500'});
-        $("div.menubar").css({'position' : 'relative'});
-        $("div.menubar").append('<div style="float: right;position: absolute; top: 20px; right: 0px;"><iframe src="http://www.facebook.com/plugins/like.php?href=' + encodeURIComponent(location) + '&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></div>');
-        //$("div.path").next().append('<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsearch.cpan.org%2F%7Eoalders%2FHTML-Restrict-0.06%2Flib%2FHTML%2FRestrict.pm&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80 (http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsearch.cpan.org%2F%7Eoalders%2FHTML-Restrict-0.06%2Flib%2FHTML%2FRestrict.pm&layout=standard&show_faces=true&width=450&action=like&colorscheme=light&height=80)" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>');
+
+        if ( $("#permalink").length ) {
+            $("div.logo").css({'position' : 'relative', 'z-index' : '500'});
+            $("div.menubar").css({'position' : 'relative'});
+            $("div.menubar").append('<div style="float: right;position: absolute; top: 23px; right: 0px;"><iframe src="http://www.facebook.com/plugins/like.php?href=' + encodeURIComponent(location) + '&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></div>');
+        }
 
     });
 </script>
