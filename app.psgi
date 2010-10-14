@@ -37,33 +37,33 @@ my $pod_highlight = q[
         SyntaxHighlighter.defaults['gutter'] = false;
         SyntaxHighlighter.defaults['toolbar'] = false;
         SyntaxHighlighter.all();
-    
+
         $("h2.sr").each(function() {
-        
+
             // parse the page to get the list of modules
             module = $(this).find("b").text();
-  
+
             // keep a reference to the line that shows information about the module
             infoblock = $(this).next().next().next().get(0);
             if ( ! infoblock ) {
                 // edge case - there is no description for this module
                 infoblock = find_sibling_by_tagname(this, "SMALL", "P", 0);
             }
-        
-            // keep track of the module distribution 
+
+            // keep track of the module distribution
             if ( infoblock && infoblock.childNodes[1] ) {
                 dist = infoblock.childNodes[1].href;
             }
             if ( dist ) {
                 dist = dist.replace(/\/$/, '');
                 dist = dist.replace(/^.*\//, '');
-        
+
                 dists_by_module[module] = dist;
                 infoblocks_by_module[module] = infoblock;
                 dists[dist] = 1;
             }
         });
-        
+
         // loop through the dists to get the number cpan dependents
         // a callback will update the page with the number of dependents for each module
         for ( var dist in dists ) {
@@ -75,6 +75,12 @@ my $pod_highlight = q[
 
         var location = document.location.href;
         location = location.replace(/http:\/\/.*?\//, "http://search.cpan.org/");
+        var permalink = $("#permalink :first-child").attr("href");
+        if (typeof permalink != 'undefined') {
+            location = "http://search.cpan.org" + permalink;
+        }
+        //console.log( location );
+        //console.log(encodeURIComponent(location));
         $("div.logo").css({'position' : 'relative', 'z-index' : '500'});
         $("div.menubar").css({'position' : 'relative'});
         $("div.menubar").append('<div style="float: right;position: absolute; top: 20px; right: 0px;"><iframe src="http://www.facebook.com/plugins/like.php?href=' + encodeURIComponent(location) + '&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></div>');
@@ -101,6 +107,11 @@ $(document).ready(function() {
 </script>
 ];
 
+use  Plack::App::Proxy::Selective;
+use Path::Class;
+
+
+
 my $app = builder {
     #enable "Debug", panels => [qw(Environment Memory Timer Response)];
     mount '/source' => builder {
@@ -122,6 +133,7 @@ my $app = builder {
         enable '+HTML::Highlighter', param => 'query';
         Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
     };
+
 };
 
 $app;
