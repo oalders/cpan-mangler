@@ -27,8 +27,13 @@ snippets will now enjoy syntax highlighting.
 
 We'd like to thank the following people for their contributions:
 
-Jesse Thompson: The search dependents data is a slight reworking of Jesse's
-excellent Greasemonkey script:
-L<http://blogs.perl.org/users/jesse_thompson/2010/08/cpan-search-dependents.html>
+Jesse Thompson
+    The search dependents data is a slight reworking of Jesse's
+    excellent Greasemonkey script:
+    L<http://blogs.perl.org/users/jesse_thompson/2010/08/cpan-search-dependents.html>
 
-Lee Aylward: Lee added HTML::Highlighter integration L<http://github.com/leedo>
+Lee Aylward
+    Lee added HTML::Highlighter integration: L<http://github.com/leedo>
+
+Our cross-domain AJAX requests were inspired by this tutorial:
+L<http://blancer.com/tutorials/14841/quick-tip-cross-domain-ajax-request-with-yql-and-jquery/>
