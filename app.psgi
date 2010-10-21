@@ -107,9 +107,6 @@ $(document).ready(function() {
 </script>
 ];
 
-use  Plack::App::Proxy::Selective;
-use Path::Class;
-
 
 
 my $app = builder {
