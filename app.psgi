@@ -111,6 +111,7 @@ $(document).ready(function() {
 
 my $app = builder {
     #enable "Debug", panels => [qw(Environment Memory Timer Response)];
+    enable 'Plack::Middleware::Proxy::RewriteLocation';
     mount '/source' => builder {
         enable 'HTMLify',
             set_head       => $source_highlight,
