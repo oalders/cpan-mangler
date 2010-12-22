@@ -121,7 +121,7 @@ my $app = builder {
         enable 'SimpleContentFilter', filter => sub {
             encode_entities($_);
         };
-        Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org/src/' )->to_app;
+        Plack::App::Proxy->new( remote => 'http://cpansearch.perl.org:80/src/' )->to_app;
     };
     mount '/'    => builder {
         enable 'SimpleContentFilter', filter => sub {
@@ -129,7 +129,7 @@ my $app = builder {
             s{/src/}{/source/}gi;
         };
         enable '+HTML::Highlighter', param => 'query';
-        Plack::App::Proxy->new( remote => 'http://search.cpan.org/' )->to_app;
+        Plack::App::Proxy->new( remote => 'http://search.cpan.org:80/' )->to_app;
     };
 
 };
